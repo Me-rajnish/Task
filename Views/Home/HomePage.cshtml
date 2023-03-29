@@ -1,0 +1,129 @@
+﻿@*
+@{
+    ViewData["Title"] = "HomePage";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .topnav {
+            overflow: hidden;
+            background-color: #333;
+        }
+
+            .topnav a {
+                float: left;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                font-size: 17px;
+            }
+
+                .topnav a:hover {
+                    background-color: #ddd;
+                    color: black;
+                }
+
+                .topnav a.active {
+                    background-color: #04AA6D;
+                    color: white;
+                }
+    </style>
+</head>
+<body>
+
+    <div class="topnav">
+        <a class="active" href="#home">Home</a>
+        <a asp-action="GetCustomer" asp-controller="Customer">Customer</a>
+        <a asp-action="GetBooking" asp-controller="Booking">Booking</a>
+       
+    </div>
+
+    <div style="padding-left:16px">
+        <h2>Top Navigation Example</h2>
+        <p>Some content..</p>
+    </div>
+
+</body>
+</html>
+*@
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DroneX - Home</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+
+</style>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">DroneX</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-action="HomePage" asp-controller="Home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="GetCustomer" asp-controller="Customer">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="CustomerAdd" asp-controller="Booking">Booking</a>
+                </li>
+             
+            </ul>
+        </div>
+    </nav>
+
+    <div class="jumbotron">
+        <h1>Welcome to DroneX</h1>
+        <p class="lead">The ultimate destination for drone enthusiasts</p>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>About Us</h2>
+                <p>DroneX is a community of drone enthusiasts who share a passion for drones and their capabilities. We provide a platform for drone lovers to connect, share knowledge, and stay updated with the latest drone news and trends.</p>
+                <a class="btn btn-secondary" href="#" role="button">Read More</a>
+            </div>
+            <div class="col-md-4">
+                <h2>Our Services</h2>
+                <p>We offer a range of services to help drone enthusiasts get the most out of their drones, including drone repair, customization, and training. Our team of experts is always ready to help you with your drone-related needs.</p>
+                <a class="btn btn-secondary" href="#" role="button">View Services</a>
+            </div>
+            <div class="col-md-4">
+                <h2>Contact Us</h2>
+                <p>If you have any questions or queries, please feel free to contact us. Our team is always available to assist you with your drone-related needs.</p>
+                <a class="btn btn-secondary" href="#" role="button">Contact Us</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">&copy; DroneX 2023. All Rights Reserved.</span>
+        </div>
+    </footer>
+    </body>
+    </html>
+  

@@ -1,0 +1,82 @@
+﻿@model Task2.Models.BookingCustomerTb
+@{
+    Layout = null;
+}
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">DroneX</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" asp-action="HomePage" asp-controller="Home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="GetCustomer" asp-controller="Customer">Customer</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-action="CustomerAdd" asp-controller="Booking">Booking</a>
+                </li>
+               
+            </ul>
+        </div>
+        </nav>
+    <form method="post" asp-action="BookingAdd">
+        <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" class="form-control" id="customerName" value="@ViewBag.FirstName @ViewBag.LastName" name="customerName" readonly required>
+        </div>
+        <div class="form-group">
+            <label for="customerEmail">Customer Email</label>
+            <input type="email" class="form-control" id="customerEmail" value="@ViewBag.Email" name="customerEmail" readonly required>
+        </div>
+   
+        <div class="form-group">
+            <label for="locationId">Drone Location</label>
+            <div class="form-group">
+    <label asp-for="location_Id" class="control-label"></label>
+    <select asp-for="location_Id" class="form-control" asp-items="@ViewBag.Locations"></select>
+    <span asp-validation-for="location_Id" class="text-danger"></span>
+</div>
+
+            @*<select class="form-control" id="locationId" name="locationId" required>
+                <option  value="">-- Select Location --</option>
+                @foreach (var location in ViewBag.GetDroneLocation)
+                {
+                    <option value="@location.LocationId" >@location.LocationName</option>
+                }
+            </select>*@
+         @*   <select class="form-control" id="locationId" name="locationId" required>
+                <option value="">-- Select Location --</option>
+                @foreach (var location in ViewBag.GetDroneLocation)
+                {
+                    <option value="@location.LocationId">@location.LocationName</option>
+                }
+            </select>*@
+            <div class="form-group">
+                <label asp-for="location_Id" class="control-label"></label>
+                <select asp-for="location_Id" class="form-control" />
+                <span asp-validation-for="location_Id" class="text-danger"></span>
+            </div>
+
+        </div>
+    @*    <div class="form-group">
+            <label for="droneShotId">Drone Shot</label>
+            <select asp-for="drone_shot_id"  class="form-control" id="droneShotId" name="droneShotId" required>
+                <option value="">-- Select Drone Shot --</option>
+                @foreach (var shot in ViewBag.Shot)
+                {
+                    <option value="@shot.DronhotId">@shot.DroneShotName</option>
+                }
+            </select>
+        </div>*@
+        <div class="form-group">
+            <label for="createdTime">Created Time</label>
+            <input type="datetime-local" class="form-control" id="createdTime" name="createdTime" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Booking</button>
+    </form>
+</div>

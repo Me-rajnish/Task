@@ -1,0 +1,231 @@
+﻿@model IEnumerable<Task2.Models.CustomerTb>
+
+@{
+    ViewData["Title"] = "GetCustomer";
+}
+@{
+    Layout = null;
+}
+@{
+    int count = 0;
+}
+
+
+
+<html>
+    <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+   
+    <link rel="stylesheet" href="style.css">
+    </head>
+    <style>
+        .container{
+            margin-top:60px;
+        }
+    </style>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">DroneX</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item active">
+                <a class="nav-link" asp-action="HomePage" asp-controller="Home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-action="GetCustomer" asp-controller="Customer">Customer</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-action="Getbooking" asp-controller="Booking">Booking</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Contact</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <a asp-action="CustomerAdd"> <button type="button" class="btn btn-primary">Add Customer</button></a>
+    <br />
+    <br />
+    <br />
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Sr.no</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Gender</th>
+                <th>Action</th>
+                <th>Booking</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if(Model==null){
+                <tr>
+                    <td colspan="3">
+                        No Customer Found
+                    </td>
+                </tr>
+            }
+            else{
+            @foreach (var item in Model)
+            {
+                count++;
+                <tr>
+                    <td>
+                        <span>@count
+                        </span>
+                    </td>
+                    <td>
+                        <span>@item.FirstName @item.LastName</span>
+
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PhoneNumber)
+                    </td>
+                    <td>
+                        @if (item.Gender == "M")
+                        {
+                            <span>
+                                Male
+                            </span>
+                        }
+                        else
+                        {
+                            <span>Female</span>
+                        }
+                    </td>
+
+                    <td>
+                            <a asp-action="EditCustomer" asp-route-id="@item.CustomerId">  <button class="btn btn-success btn-sm rounded-0" type="button"><i class="fa fa-edit"></i></button></a>
+                     <button class="btn btn-danger btn-sm rounded-0"  onclick="DeleteAlert('@item.CustomerId')" type="button"><i class="fa fa-trash"></i></button> 
+
+
+                     @*   <a asp-action="EditCustomer" asp-route-id="@item.CustomerId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.CustomerId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.CustomerId">Delete</a>*@
+                    </td>
+                    <td>
+                           <a asp-action="BookingAdd"  asp-controller="Booking" asp-route-id="@item.CustomerId">  <button type="button" class="btn btn-success">Booking</button></a>
+                    </td>
+                </tr>
+            }
+            }
+        </tbody>
+
+
+    </table>
+    <a asp-action="HomePage" asp-controller="Home"><button class="btn btn-primary hBack" type="button">Back </button></a>
+</div>
+
+
+@if (TempData["CustomerAdd"] != null )
+{
+
+    <script>
+
+
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Customer Added Successful!!!'
+        })
+    </script>
+
+}
+@if (TempData["CustomerUpdate"] != null)
+{
+
+    <script>
+
+
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Customer Updated Successful!!!'
+        })
+    </script>
+
+}
+@if (TempData["CustomerDelete"] != null)
+{
+
+    <script>
+
+
+
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 4000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+        })
+
+        Toast.fire({
+            icon: 'success',
+            title: 'Customer Delete Successful!!!'
+        })
+    </script>
+
+}
+<script>
+
+function DeleteAlert(id)
+ {
+    Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            window.location.assign(`/Customer/DeleteCustomer/${id}`);
+        }
+    })
+}
+</script>
+</html>

@@ -1,0 +1,100 @@
+﻿@model Task2.Models.BookingCustomerTb
+@*
+
+@{
+    ViewData["Title"] = "CustomerAdd";
+}
+
+<h1>CustomerAdd</h1>
+
+<h4>BookingCustomerTb</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CustomerAdd">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CustomerId" class="control-label"></label>
+                <input asp-for="CustomerId" class="form-control" />
+                <span asp-validation-for="CustomerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="location_Id" class="control-label"></label>
+                <input asp-for="location_Id" class="form-control" />
+                <span asp-validation-for="location_Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="drone_shot_id" class="control-label"></label>
+                <input asp-for="drone_shot_id" class="form-control" />
+                <span asp-validation-for="drone_shot_id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdatedDate" class="control-label"></label>
+                <input asp-for="UpdatedDate" class="form-control" />
+                <span asp-validation-for="UpdatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeleteBy" class="control-label"></label>
+                <input asp-for="DeleteBy" class="form-control" />
+                <span asp-validation-for="DeleteBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+*@
+
+<div class="container">
+    <h1>Create Booking</h1>
+    <form method="post" action="/booking/create">
+        <div class="form-group">
+            <label for="customerName">Customer Name</label>
+            <input type="text" class="form-control" id="customerName" name="customerName" required>
+        </div>
+        <div class="form-group">
+            <label for="customerEmail">Customer Email</label>
+            <input type="email" class="form-control" id="customerEmail" name="customerEmail" required>
+        </div>
+        <div class="form-group">
+            <label for="customerPhone">Customer Phone Number</label>
+            <input type="tel" class="form-control" id="customerPhone" name="customerPhone" required>
+        </div>
+        <div class="form-group">
+            <label for="locationId">Drone Location</label>
+            <select class="form-control" id="locationId" name="locationId" required>
+                <option value="">-- Select Location --</option>
+                @foreach (var location in ViewBag.Locations)
+                {
+                    <option value="@location.LocationId">@location.LocationName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="droneShotId">Drone Shot</label>
+            <select class="form-control" id="droneShotId" name="droneShotId" required>
+                <option value="">-- Select Drone Shot --</option>
+                @foreach (var shot in ViewBag.Shots)
+                {
+                    <option value="@shot.DroneShotId">@shot.DroneShotName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="createdTime">Created Time</label>
+            <input type="datetime-local" class="form-control" id="createdTime" name="createdTime" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Booking</button>
+    </form>
+</div>

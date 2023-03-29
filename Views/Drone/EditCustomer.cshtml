@@ -1,0 +1,188 @@
+﻿@model Task2.Models.CustomerTb
+
+@{
+    ViewData["Title"] = "EditCustomer";
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register</title> <!--Change the text to "Register"-->
+</head>
+<style>
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        width: 25vw;
+    }
+
+    h1, p {
+        text-align: center;
+    }
+    /* styles for button */
+    button {
+        padding: 0.75em;
+        border: none;
+        outline: none;
+        background-color: rgb(68, 18, 232);
+        color: white;
+        border-radius: 0.25em;
+    }
+
+        /* hover functionality for button */
+        button:hover {
+            cursor: pointer;
+            background-color: rgb(41, 4, 164);
+        }
+
+
+    /* more styles added to beautify the input fields */
+    input {
+        margin: 0.50em 0em 2em 0em;
+        outline: none;
+        padding: 0.5em;
+        border: none;
+        height: 30px;
+        background-color: rgb(225, 225, 225);
+        border-radius: 0.25em;
+        color: black;
+    }
+
+    .text-danger {
+        display: inline-block;
+        margin-left: 10px;
+        color: red;
+        margin-top: -20px;
+    }
+
+    .required {
+        color: red;
+    }
+
+</style>
+<body>
+    <form asp-action="EditCustomer">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="container">
+            <h1>Edit</h1>
+            <p>Kindly fill in this form to register.</p>
+            <input type="hidden" asp-for="CustomerId" />
+
+            <label for="FirstName"><b>First Name</b><span class="required">*</span></label>
+            <input asp-for="FirstName" placeholder="Enter First Name" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+            <br />
+
+            <label for="LastName"><b>Last Name</b><span class="required">*</span></label>
+            <input asp-for="LastName" placeholder="Enter Last Name" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
+            <br />
+            <label for="Email"><b>Email</b><span class="required">*</span></label>
+
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+            <br />
+            <label for="PhoneNumber"><b>Mobile Number</b><span class="required">*</span></label>
+
+            <input asp-for="PhoneNumber" class="form-control" />
+            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            <br />
+            <div>
+                <label for="Gender"><b>Gender</b><span class="required">*</span></label>
+                <input asp-for="Gender" type="radio" id="Male" name="Gender" value="M">Male
+
+                <input asp-for="Gender" type="radio" id="age2" name="Gender" value="F">Female
+
+            </div>
+
+            <!-- submit button -->
+            <button type="submit">Update</button>
+        </div>
+        <div></div>
+    </form>
+
+</body>
+</html>
+
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }
+
+
+@*<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditCustomer">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CustomerId" />
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhoneNumber" class="control-label"></label>
+                <input asp-for="PhoneNumber" class="form-control" />
+                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Gender" class="control-label"></label>
+                <input asp-for="Gender" class="form-control" />
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="IsDeleted" /> @Html.DisplayNameFor(model => model.IsDeleted)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdatedDate" class="control-label"></label>
+                <input asp-for="UpdatedDate" class="form-control" />
+                <span asp-validation-for="UpdatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeleteBy" class="control-label"></label>
+                <input asp-for="DeleteBy" class="form-control" />
+                <span asp-validation-for="DeleteBy" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>*@
+
